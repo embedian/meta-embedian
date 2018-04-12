@@ -1,0 +1,20 @@
+The Embedian Yocto software layer for SMARC T437X Computer On Module platforms based on TI Processor-SDK-04-01.00.06 (Yocto Morty) release.
+
+It is hosted on git.embedian.com with the source repository at 
+git@git.embedian.com:developer/meta-smarct437x-sdk04010006.git
+
+This layer depends on:
+
+URI: git://arago-project.org/git/meta-arago.git
+branch: morty
+revision: HEAD
+layers: meta-arago-distro, meta-arago-extras
+
+URI: git://arago-project.org/git/meta-ti
+branch: morty
+revision: HEAD:a18d57af8384ced25996739bb66d197c69efb77b
+
+Send pull requests, patches, comments or questions to eric.lee@embedian.com
+
+Maintainers: Eric Lee <eric.lee<at>embediandotcom>
+             Max Lin <max.lin<at>embediandotcom>
