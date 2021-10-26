@@ -18,7 +18,7 @@ KERNEL_DEFCONFIG = "${S}/arch/arm64/configs/smarcimx8mp_defconfig"
 
 KERNEL_SRC ?= "git@git.embedian.com:developer/smarc-fsl-linux-kernel.git;protocol=git"
 SRC_URI = "${EMB_KERNEL_MIRROR};protocol=ssh;branch=${SRCBRANCH}"
-SRCREV = "546afca980851426df56db1ff3994bbeddb692a8"
+SRCREV = "5e48acb5632181b79396eaf129e72f8745aa4b33"
 
 LINUX_VERSION = "5.10.9"
 
