@@ -17,7 +17,7 @@ LIC_FILES_CHKSUM = "file://Licenses/gpl-2.0.txt;md5=b234ee4d69f5fce4486a80fdaf4a
 UBOOT_SRC ?= "${EMB_UBOOT_MIRROR};protocol=ssh"
 SRCBRANCH = "smarc_8mp_lf_v2020.04"
 SRC_URI = "${UBOOT_SRC};branch=${SRCBRANCH}"
-SRCREV = "57e535649cba0900d49c3a06ddb7b3c15b900255"
+SRCREV = "7beba4bebec05d10bfe314e6a47e34d42296a100"
 
 S = "${WORKDIR}/git"
 
