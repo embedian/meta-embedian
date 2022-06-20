@@ -100,7 +100,7 @@ echo "================================================"
 
 help() {
 	bn=`basename $0`
-	echo " Usage: MACHINE=<smarcimx8mp4g|smarcimx8mp6g> $bn <options> device_node"
+	echo " Usage: MACHINE=<smarcimx8mp2g|smarcimx8mp4g|smarcimx8mp6g> $bn <options> device_node"
 	echo
 	echo " options:"
 	echo " -h		display this Help message"
@@ -117,7 +117,7 @@ if [[ $EUID -ne 0 ]] ; then
 	exit 1
 fi
 
-if [[ $MACHINE != "smarcimx8mp4g" && $MACHINE != "smarcimx8mp6g" ]] ; then
+if [[ "${MACHINE}" != "smarcimx8mp2g" && "${MACHINE}" != "smarcimx8mp4g" && "${MACHINE}" != "smarcimx8mp6g" ]] ; then
 	help
 	exit 1
 fi
@@ -296,7 +296,7 @@ function copy_images
         echo "Copying Kernel Parameter uEnv.txt to /opt/images/"
                 cp -v ${YOCTO_SCRIPTS_PATH}/uEnv_emmc.txt ${P2_MOUNT_DIR}/opt/images/Yocto/uEnv.txt
 
-	if [[ $MACHINE = "smarcimx8mp4g" || ${MACHINE} = "smarcimx8mp6g" ]]; then
+	if [[ "${MACHINE}" = "smarcimx8mp2g" || "${MACHINE}" = "smarcimx8mp4g" || "${MACHINE}" = "smarcimx8mp6g" ]]; then
 		cp ${YOCTO_IMGS_PATH}/imx-boot-${MACHINE}-sd.bin-* ${P2_MOUNT_DIR}/opt/images/Yocto
 		(cd ${P2_MOUNT_DIR}/opt/images/Yocto; ln -fs imx-boot-${MACHINE}-sd.bin-flash_evk imx-boot-sd.bin)
 	else
