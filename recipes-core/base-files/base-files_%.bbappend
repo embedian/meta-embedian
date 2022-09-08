@@ -1,4 +1,5 @@
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
+DIRFILES = "1"
 
 SRC_URI_append_smarcimx8mp2g = " \
         file://embedian-hdmi-audio.conf \
