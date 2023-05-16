@@ -1,0 +1,29 @@
+optargs="video=HDMI-A-1:1920x1080-32@60 consoleblank=0"
+#optargs="video=HDMI-A-1:3840x2160-32@30 consoleblank=0"
+#optargs="video=HDMI-A-1:3840x2160-32@60 consoleblank=0"
+#console port SER3
+console=ttymxc0,115200 earlycon=ec_imx6q,0x30860000,115200
+#console port SER2
+#console=ttymxc1,115200 earlycon=ec_imx6q,0x30890000,115200
+#console port SER1
+#console=ttymxc2,115200 earlycon=ec_imx6q,0x30880000,115200
+#console port SER0
+#console=ttymxc3,115200 earlycon=ec_imx6q,0x30A60000,115200
+mmcdev=1
+mmcpart=1
+image=Image
+loadaddr=0x40480000
+fdt_addr=0x43000000
+mmcroot=/dev/mmcblk1p2 rw
+usbroot=/dev/sda2 rw
+mmcrootfstype=ext4 rootwait fixrtc
+netdev=eth0
+ethact=FEC0
+ipaddr=192.168.1.150
+serverip=192.168.1.53
+gatewayip=192.168.1.254
+mmcargs=setenv bootargs ${mcore_clk} console=${console} root=${mmcroot} rootfstype=${mmcrootfstype} ${optargs}
+uenvcmd=run loadimage; run loadfdt; run mmcboot
+# USB Boot
+#usbargs=setenv bootargs console=${console} root=${usbroot} rootfstype=${mmcrootfstype} ${optargs}
+#uenvcmd=run loadusbimage; run loadusbfdt; run usbboot
