@@ -23,7 +23,7 @@ LOCALVERSION = "-1.0.0+yocto"
 KERNEL_SRC ?= "git://git@git.embedian.com/developer/smarc-fsl-linux-kernel.git;protocol=ssh;branch=${SRCBRANCH}"
 SRC_URI = "${KERNEL_SRC}"
 
-SRCREV = "980307a817e5aba53eb10323bf1d9fd2365ee2f9"
+SRCREV = "1bfd37880dc75707d4b87b110a45a62a96a8c5da"
 
 LINUX_VERSION = "5.15.71"
 
