@@ -16,7 +16,7 @@ LIC_FILES_CHKSUM = "file://Licenses/gpl-2.0.txt;md5=b234ee4d69f5fce4486a80fdaf4a
 UBOOT_SRC ?= "git://git@git.embedian.com/developer/smarc-t335x-uboot.git;protocol=ssh"
 SRCBRANCH = "emb_lf_v2022.04"
 SRC_URI = "${UBOOT_SRC};branch=${SRCBRANCH}"
-SRCREV = "a158195a2a8208361253d502f550544b8dd880d6"
+SRCREV = "d37704c6b2b2ea9253773a888804eebc5ea4b2c7"
 LOCALVERSION = "-1.0.0+yocto"
 
 DEPENDS += "gnutls-native xxd-native"
