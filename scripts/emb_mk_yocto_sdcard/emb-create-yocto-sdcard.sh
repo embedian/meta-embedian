@@ -322,7 +322,7 @@ function install_yocto
 		cp -v ${YOCTO_SCRIPTS_PATH}/uEnv_6qdl.txt ${P1_MOUNT_DIR}/uEnv.txt
 		cp -v ${YOCTO_IMGS_PATH}/u-boot.imx ${P1_MOUNT_DIR}/u-boot.imx
 	elif [[ "${MACHINE}" = "smarcfimx7d2g" || "${MACHINE}" = "smarcfimx7d" || "${MACHINE}" = "smarcfimx7s" ]]; then
-                cp -v ${YOCTO_IMGS_PATH}/imx7d-smarc.dtb ${P1_MOUNT_DIR}/dtbs/imx6dl-smarc.dtb
+                cp -v ${YOCTO_IMGS_PATH}/imx7d-smarc.dtb ${P1_MOUNT_DIR}/dtbs/imx7d-smarc.dtb
                 cp -v ${YOCTO_SCRIPTS_PATH}/uEnv_7ds.txt ${P1_MOUNT_DIR}/uEnv.txt
                 cp -v ${YOCTO_IMGS_PATH}/u-boot.imx ${P1_MOUNT_DIR}/u-boot.imx
 
