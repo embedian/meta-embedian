@@ -16,14 +16,14 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=6bc538ed5bd9a7fc9398086aedcd7e46"
 
 DEPENDS += "lzop-native bc-native"
 
-SRCBRANCH = "emb_imx_lf-5.15.y"
+SRCBRANCH = "rt_linux_5.15.71"
 LOCALVERSION = "-1.0.0+yocto"
 # Use Github as Kernel Source Repo
 # KERNEL_SRC ?= "git://github.com/embedian/smarc-fsl-linux-kernel.git;protocol=https;branch=${SRCBRANCH}"
 KERNEL_SRC ?= "git://git@git.embedian.com/developer/smarc-fsl-linux-kernel.git;protocol=ssh;branch=${SRCBRANCH}"
 SRC_URI = "${KERNEL_SRC}"
 
-SRCREV = "adf910d81008d0af3ca2e53eec31f3b2579c316a"
+SRCREV = "29b2b859b64ea5e95a90e1c602e506a0991fb567"
 
 LINUX_VERSION = "5.15.71"
 
@@ -46,7 +46,7 @@ DO_CONFIG_V7_COPY:mx9-nxp-bsp = "no"
 
 # Add setting for LF Mainline build
 IMX_KERNEL_CONFIG_AARCH32 = "emb_imx_v7_defconfig"
-IMX_KERNEL_CONFIG_AARCH64 = "emb_imx_v8_defconfig"
+IMX_KERNEL_CONFIG_AARCH64 = "rt_emb_imx_v8_defconfig"
 KBUILD_DEFCONFIG ?= ""
 KBUILD_DEFCONFIG:mx6-nxp-bsp= "${IMX_KERNEL_CONFIG_AARCH32}"
 KBUILD_DEFCONFIG:mx7-nxp-bsp= "${IMX_KERNEL_CONFIG_AARCH32}"

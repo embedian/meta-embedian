@@ -16,12 +16,12 @@ readonly YOCTO_ROOT="${SCRIPT_POINT}/../../../../"
 
 readonly BSP_TYPE="YOCTO"
 	if [[ "${MACHINE}" = "smarcimx8mp2g" || "${MACHINE}" = "smarcimx8mp4g" || "${MACHINE}" = "smarcimx8mp6g" || "${MACHINE}" = "pitximx8mp2g" || "${MACHINE}" = "pitximx8mp4g" || "${MACHINE}" = "pitximx8mp6g" || "${MACHINE}" = "smarcimx8mq2g" || "${MACHINE}" = "smarcimx8mq4g" || "${MACHINE}" = "smarcimx8mm2g" || "${MACHINE}" = "smarcimx8mm4g" || "${MACHINE}" = "smarcimx8qm4g" || "${MACHINE}" = "smarcimx8qm8g" ]]; then
-readonly YOCTO_BUILD=${YOCTO_ROOT}/build-imx-real-time-edge
+readonly YOCTO_BUILD=${YOCTO_ROOT}/build-xwayland
 	fi
 	if [[ "${MACHINE}" = "smarcfimx6q1g" || "${MACHINE}" = "smarcfimx6q2g" || "${MACHINE}" = "smarcfimx6qp1g" || "${MACHINE}" = "smarcfimx6qp2g" || "${MACHINE}" = "smarcfimx6dl1g" || "${MACHINE}" = "smarcfimx6solo" || "${MACHINE}" = "smarcfimx7d2g" || "${MACHINE}" = "smarcfimx7d" || "${MACHINE}" = "smarcfimx7s" ]]; then
 readonly YOCTO_BUILD=${YOCTO_ROOT}/build-fb
 	fi
-readonly YOCTO_DEFAULT_IMAGE=nxp-image-real-time-edge
+readonly YOCTO_DEFAULT_IMAGE=fsl-image-qt6-validation-imx
 
 readonly YOCTO_SCRIPTS_PATH=${SCRIPT_POINT}
 readonly YOCTO_IMGS_PATH=${YOCTO_BUILD}/tmp/deploy/images/${MACHINE}
@@ -259,11 +259,8 @@ function install_bootloader
 {
 	echo
 	echo "Installing U-Boot"
-	if [[ "${MACHINE}" = "smarcimx8mp2g" || "${MACHINE}" = "smarcimx8mp4g" || "${MACHINE}" = "smarcimx8mp6g" || "${MACHINE}" = "pitximx8mp2g" || "${MACHINE}" = "pitximx8mp4g" || "${MACHINE}" = "pitximx8mp6g" || "${MACHINE}" = "smarcimx8mq2g" || "${MACHINE}" = "smarcimx8mq4g" || "${MACHINE}" = "smarcimx8mm2g" || "${MACHINE}" = "smarcimx8mm4g" ]]; then
+	if [[ "${MACHINE}" = "smarcimx8qm4g" || "${MACHINE}" = "smarcimx8qm8g" || "${MACHINE}" = "smarcimx8mp2g" || "${MACHINE}" = "smarcimx8mp4g" || "${MACHINE}" = "smarcimx8mp6g" || "${MACHINE}" = "pitximx8mp2g" || "${MACHINE}" = "pitximx8mp4g" || "${MACHINE}" = "pitximx8mp6g" || "${MACHINE}" = "smarcimx8mq2g" || "${MACHINE}" = "smarcimx8mq4g" || "${MACHINE}" = "smarcimx8mm2g" || "${MACHINE}" = "smarcimx8mm4g" ]]; then
 	dd if=${YOCTO_IMGS_PATH}/imx-boot-${MACHINE}-sd.bin-flash_evk of=${LPARAM_BLOCK_DEVICE} bs=1K seek=${BOOTLOADER_OFFSET}; sync
-	fi
-	if [[ "${MACHINE}" = "smarcimx8qm4g" || "${MACHINE}" = "smarcimx8qm8g" ]]; then
-	dd if=${YOCTO_IMGS_PATH}/imx-boot-${MACHINE}-sd.bin-flash_spl of=${LPARAM_BLOCK_DEVICE} bs=1K seek=${BOOTLOADER_OFFSET}; sync
 	fi
 	if [[ "${MACHINE}" = "smarcfimx6q1g" || "${MACHINE}" = "smarcfimx6q2g" || "${MACHINE}" = "smarcfimx6qp1g" || "${MACHINE}" = "smarcfimx6qp2g" || "${MACHINE}" = "smarcfimx6dl1g" || "${MACHINE}" = "smarcfimx6solo" || "${MACHINE}" = "smarcfimx7d2g" || "${MACHINE}" = "smarcfimx7d" || "${MACHINE}" = "smarcfimx7s" ]]; then
 	dd if=${YOCTO_IMGS_PATH}/u-boot.imx of=${LPARAM_BLOCK_DEVICE} bs=512 seek=${BOOTLOADER_OFFSET}; sync
@@ -382,12 +379,9 @@ function copy_images
 		exit 1
 	fi
 
-	if [[ "${MACHINE}" = "smarcimx8mp2g" || "${MACHINE}" = "smarcimx8mp4g" || "${MACHINE}" = "smarcimx8mp6g" || "${MACHINE}" = "pitximx8mp2g" || "${MACHINE}" = "pitximx8mp4g" || "${MACHINE}" = "pitximx8mp6g" || "${MACHINE}" = "smarcimx8mq2g" || "${MACHINE}" = "smarcimx8mq4g" || "${MACHINE}" = "smarcimx8mm2g" || "${MACHINE}" = "smarcimx8mm4g" ]]; then
+	if [[ "${MACHINE}" = "smarcimx8qm4g" || "${MACHINE}" = "smarcimx8qm8g" || "${MACHINE}" = "smarcimx8mp2g" || "${MACHINE}" = "smarcimx8mp4g" || "${MACHINE}" = "smarcimx8mp6g" || "${MACHINE}" = "pitximx8mp2g" || "${MACHINE}" = "pitximx8mp4g" || "${MACHINE}" = "pitximx8mp6g" || "${MACHINE}" = "smarcimx8mq2g" || "${MACHINE}" = "smarcimx8mq4g" || "${MACHINE}" = "smarcimx8mm2g" || "${MACHINE}" = "smarcimx8mm4g" ]]; then
 		cp ${YOCTO_IMGS_PATH}/imx-boot-${MACHINE}-sd.bin-* ${P2_MOUNT_DIR}/opt/images/Yocto
 		(cd ${P2_MOUNT_DIR}/opt/images/Yocto; ln -fs imx-boot-${MACHINE}-sd.bin-flash_evk imx-boot-sd.bin)
-	elif [[ "${MACHINE}" = "smarcimx8qm4g" || "${MACHINE}" = "smarcimx8qm8g" ]]; then
-		cp ${YOCTO_IMGS_PATH}/imx-boot-${MACHINE}-sd.bin-* ${P2_MOUNT_DIR}/opt/images/Yocto
-		(cd ${P2_MOUNT_DIR}/opt/images/Yocto; ln -fs imx-boot-${MACHINE}-sd.bin-flash_spl imx-boot-sd.bin)
 	else
 		cp ${YOCTO_IMGS_PATH}/u-boot.imx ${P2_MOUNT_DIR}/opt/images/Yocto/u-boot.imx
 	fi
