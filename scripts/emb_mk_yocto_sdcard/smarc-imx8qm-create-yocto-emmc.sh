@@ -149,6 +149,9 @@ install_kernel_to_emmc()
         mount /dev/${BLOCK}${PART}${BOOTPART} ${MOUNTDIR}
 	mkdir -p ${MOUNTDIR}/dtbs/
 	cp -v ${IMGS_PATH}/${KERNEL_IMAGE} ${MOUNTDIR}
+	cp -v ${IMGS_PATH}/dpfw.bin ${MOUNTDIR}
+	cp -v ${IMGS_PATH}/hdmirxfw.bin ${MOUNTDIR}
+	cp -v ${IMGS_PATH}/hdmitxfw.bin ${MOUNTDIR}
 	cp -v ${IMGS_PATH}/${DTB_PREFIX}${DISPLAY}.dtb ${MOUNTDIR}/dtbs/imx8qm-smarc.dtb
 	cp -v ${IMGS_PATH}/uEnv.txt ${MOUNTDIR}
 

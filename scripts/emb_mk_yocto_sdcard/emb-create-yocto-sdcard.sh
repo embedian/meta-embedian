@@ -143,7 +143,7 @@ if [[ $EUID -ne 0 ]] ; then
 	exit 1
 fi
 
-if [["${MACHINE}" != "smarcimx8qm4g" && "${MACHINE}" != "smarcimx8qm8g" && "${MACHINE}" != "smarcimx8mp2g" && "${MACHINE}" != "smarcimx8mp4g" && "${MACHINE}" != "smarcimx8mp6g" && "${MACHINE}" != "pitximx8mp2g" && "${MACHINE}" != "pitximx8mp4g" && "${MACHINE}" != "pitximx8mp6g" && "${MACHINE}" != "smarcimx8mq2g" && "${MACHINE}" != "smarcimx8mq4g" && "${MACHINE}" != "smarcimx8mm2g" && "${MACHINE}" != "smarcimx8mm4g" && "${MACHINE}" != "smarcfimx6qp2g" && "${MACHINE}" != "smarcfimx6qp1g" && "${MACHINE}" != "smarcfimx6q2g" && "${MACHINE}" != "smarcfimx6q1g" && "${MACHINE}" != "smarcfimx6dl1g" && "${MACHINE}" != "smarcfimx6solo" && "${MACHINE}" != "smarcfimx7d2g" && "${MACHINE}" != "smarcfimx7d" && "${MACHINE}" != "smarcfimx7s" ]] ; then
+if [[ "${MACHINE}" != "smarcimx8qm4g" && "${MACHINE}" != "smarcimx8qm8g" && "${MACHINE}" != "smarcimx8mp2g" && "${MACHINE}" != "smarcimx8mp4g" && "${MACHINE}" != "smarcimx8mp6g" && "${MACHINE}" != "pitximx8mp2g" && "${MACHINE}" != "pitximx8mp4g" && "${MACHINE}" != "pitximx8mp6g" && "${MACHINE}" != "smarcimx8mq2g" && "${MACHINE}" != "smarcimx8mq4g" && "${MACHINE}" != "smarcimx8mm2g" && "${MACHINE}" != "smarcimx8mm4g" && "${MACHINE}" != "smarcfimx6qp2g" && "${MACHINE}" != "smarcfimx6qp1g" && "${MACHINE}" != "smarcfimx6q2g" && "${MACHINE}" != "smarcfimx6q1g" && "${MACHINE}" != "smarcfimx6dl1g" && "${MACHINE}" != "smarcfimx6solo" && "${MACHINE}" != "smarcfimx7d2g" && "${MACHINE}" != "smarcfimx7d" && "${MACHINE}" != "smarcfimx7s" ]] ; then
 	echo "Unsupported machine!!"
 	exit 1
 fi
@@ -259,8 +259,11 @@ function install_bootloader
 {
 	echo
 	echo "Installing U-Boot"
-	if [[ "${MACHINE}" = "smarcimx8qm4g" || "${MACHINE}" = "smarcimx8qm8g" || "${MACHINE}" = "smarcimx8mp2g" || "${MACHINE}" = "smarcimx8mp4g" || "${MACHINE}" = "smarcimx8mp6g" || "${MACHINE}" = "pitximx8mp2g" || "${MACHINE}" = "pitximx8mp4g" || "${MACHINE}" = "pitximx8mp6g" || "${MACHINE}" = "smarcimx8mq2g" || "${MACHINE}" = "smarcimx8mq4g" || "${MACHINE}" = "smarcimx8mm2g" || "${MACHINE}" = "smarcimx8mm4g" ]]; then
+	if [[ "${MACHINE}" = "smarcimx8mp2g" || "${MACHINE}" = "smarcimx8mp4g" || "${MACHINE}" = "smarcimx8mp6g" || "${MACHINE}" = "pitximx8mp2g" || "${MACHINE}" = "pitximx8mp4g" || "${MACHINE}" = "pitximx8mp6g" || "${MACHINE}" = "smarcimx8mq2g" || "${MACHINE}" = "smarcimx8mq4g" || "${MACHINE}" = "smarcimx8mm2g" || "${MACHINE}" = "smarcimx8mm4g" ]]; then
 	dd if=${YOCTO_IMGS_PATH}/imx-boot-${MACHINE}-sd.bin-flash_evk of=${LPARAM_BLOCK_DEVICE} bs=1K seek=${BOOTLOADER_OFFSET}; sync
+	fi
+	if [[ "${MACHINE}" = "smarcimx8qm4g" || "${MACHINE}" = "smarcimx8qm8g" ]]; then
+	dd if=${YOCTO_IMGS_PATH}/imx-boot-${MACHINE}-sd.bin-flash_spl of=${LPARAM_BLOCK_DEVICE} bs=1K seek=${BOOTLOADER_OFFSET}; sync
 	fi
 	if [[ "${MACHINE}" = "smarcfimx6q1g" || "${MACHINE}" = "smarcfimx6q2g" || "${MACHINE}" = "smarcfimx6qp1g" || "${MACHINE}" = "smarcfimx6qp2g" || "${MACHINE}" = "smarcfimx6dl1g" || "${MACHINE}" = "smarcfimx6solo" || "${MACHINE}" = "smarcfimx7d2g" || "${MACHINE}" = "smarcfimx7d" || "${MACHINE}" = "smarcfimx7s" ]]; then
 	dd if=${YOCTO_IMGS_PATH}/u-boot.imx of=${LPARAM_BLOCK_DEVICE} bs=512 seek=${BOOTLOADER_OFFSET}; sync
@@ -297,6 +300,9 @@ function install_yocto
                 cp -v ${YOCTO_IMGS_PATH}/imx8mp-smarc${DISPLAY}.dtb ${P1_MOUNT_DIR}/dtbs/imx8mp-smarc.dtb
                 cp -v ${YOCTO_SCRIPTS_PATH}/uEnv_8mp.txt ${P1_MOUNT_DIR}/uEnv.txt
 	elif [[ "${MACHINE}" = "smarcimx8qm4g" || "${MACHINE}" = "smarcimx8qm8g" ]]; then
+		cp -v ${YOCTO_IMGS_PATH}/dpfw.bin ${P1_MOUNT_DIR}/
+		cp -v ${YOCTO_IMGS_PATH}/hdmirxfw.bin ${P1_MOUNT_DIR}/
+		cp -v ${YOCTO_IMGS_PATH}/hdmitxfw.bin ${P1_MOUNT_DIR}/
                 cp -v ${YOCTO_IMGS_PATH}/imx8qm-smarc${DISPLAY}.dtb ${P1_MOUNT_DIR}/dtbs/imx8qm-smarc.dtb
                 cp -v ${YOCTO_SCRIPTS_PATH}/uEnv_8qm.txt ${P1_MOUNT_DIR}/uEnv.txt
 	elif [[ "${MACHINE}" = "pitximx8mp2g" || "${MACHINE}" = "pitximx8mp4g" || "${MACHINE}" = "pitximx8mp6g" ]]; then
@@ -379,9 +385,12 @@ function copy_images
 		exit 1
 	fi
 
-	if [[ "${MACHINE}" = "smarcimx8qm4g" || "${MACHINE}" = "smarcimx8qm8g" || "${MACHINE}" = "smarcimx8mp2g" || "${MACHINE}" = "smarcimx8mp4g" || "${MACHINE}" = "smarcimx8mp6g" || "${MACHINE}" = "pitximx8mp2g" || "${MACHINE}" = "pitximx8mp4g" || "${MACHINE}" = "pitximx8mp6g" || "${MACHINE}" = "smarcimx8mq2g" || "${MACHINE}" = "smarcimx8mq4g" || "${MACHINE}" = "smarcimx8mm2g" || "${MACHINE}" = "smarcimx8mm4g" ]]; then
+	if [[ "${MACHINE}" = "smarcimx8mp2g" || "${MACHINE}" = "smarcimx8mp4g" || "${MACHINE}" = "smarcimx8mp6g" || "${MACHINE}" = "pitximx8mp2g" || "${MACHINE}" = "pitximx8mp4g" || "${MACHINE}" = "pitximx8mp6g" || "${MACHINE}" = "smarcimx8mq2g" || "${MACHINE}" = "smarcimx8mq4g" || "${MACHINE}" = "smarcimx8mm2g" || "${MACHINE}" = "smarcimx8mm4g" ]]; then
 		cp ${YOCTO_IMGS_PATH}/imx-boot-${MACHINE}-sd.bin-* ${P2_MOUNT_DIR}/opt/images/Yocto
 		(cd ${P2_MOUNT_DIR}/opt/images/Yocto; ln -fs imx-boot-${MACHINE}-sd.bin-flash_evk imx-boot-sd.bin)
+	elif [[ "${MACHINE}" = "smarcimx8qm4g" || "${MACHINE}" = "smarcimx8qm8g" ]]; then
+		cp ${YOCTO_IMGS_PATH}/imx-boot-${MACHINE}-sd.bin-* ${P2_MOUNT_DIR}/opt/images/Yocto
+		(cd ${P2_MOUNT_DIR}/opt/images/Yocto; ln -fs imx-boot-${MACHINE}-sd.bin-flash_spl imx-boot-sd.bin)
 	else
 		cp ${YOCTO_IMGS_PATH}/u-boot.imx ${P2_MOUNT_DIR}/opt/images/Yocto/u-boot.imx
 	fi

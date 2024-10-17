@@ -1,0 +1,176 @@
+diff --git a/conf/machine/smarcfimx6dl1g.conf b/conf/machine/smarcfimx6dl1g.conf
+index e4ede70..abec2a5 100644
+--- a/conf/machine/smarcfimx6dl1g.conf
++++ b/conf/machine/smarcfimx6dl1g.conf
+@@ -48,6 +48,9 @@ MACHINE_EXTRA_RRECOMMENDS += " \
+ 	nodejs \
+ 	networkmanager \
+ 	android-tools \
++	v4l-utils \
++	gstreamer1.0-plugins-imx \
++	imx-gst1.0-plugin \
+ "
+ 
+ IMAGE_INSTALL:append = " \
+diff --git a/conf/machine/smarcfimx6q1g.conf b/conf/machine/smarcfimx6q1g.conf
+index 8b7a6d4..2873b4e 100644
+--- a/conf/machine/smarcfimx6q1g.conf
++++ b/conf/machine/smarcfimx6q1g.conf
+@@ -48,6 +48,9 @@ MACHINE_EXTRA_RRECOMMENDS += " \
+ 	nodejs \
+ 	networkmanager \
+ 	android-tools \
++	v4l-utils \
++	gstreamer1.0-plugins-imx \
++	imx-gst1.0-plugin \
+ "
+ 
+ IMAGE_INSTALL:append = " \
+diff --git a/conf/machine/smarcfimx6q2g.conf b/conf/machine/smarcfimx6q2g.conf
+index aaa2598..3befea4 100644
+--- a/conf/machine/smarcfimx6q2g.conf
++++ b/conf/machine/smarcfimx6q2g.conf
+@@ -48,6 +48,9 @@ MACHINE_EXTRA_RRECOMMENDS += " \
+ 	nodejs \
+ 	networkmanager \
+ 	android-tools \
++	v4l-utils \
++	gstreamer1.0-plugins-imx \
++	imx-gst1.0-plugin \
+ "
+ 
+ IMAGE_INSTALL:append = " \
+@@ -59,6 +62,13 @@ IMAGE_INSTALL:append = " \
+ 	ppp \
+ 	usb-modeswitch-data \
+ 	usb-modeswitch \
++	packagegroup-core-buildessential \
++	qtbase-dev \
++	qtbase-tools \
++	qtvirtualkeyboard \
++	flac \
++	python3 \
++	python3-pip \
+ "
+ 
+ IMAGE_FSTYPES = "tar.bz2"
+diff --git a/conf/machine/smarcfimx6qp1g.conf b/conf/machine/smarcfimx6qp1g.conf
+index 546816d..8218fe2 100644
+--- a/conf/machine/smarcfimx6qp1g.conf
++++ b/conf/machine/smarcfimx6qp1g.conf
+@@ -48,6 +48,9 @@ MACHINE_EXTRA_RRECOMMENDS += " \
+ 	nodejs \
+ 	networkmanager \
+ 	android-tools \
++	v4l-utils \
++	gstreamer1.0-plugins-imx \
++	imx-gst1.0-plugin \
+ "
+ 
+ IMAGE_INSTALL:append = " \
+diff --git a/conf/machine/smarcfimx6qp2g.conf b/conf/machine/smarcfimx6qp2g.conf
+index 00d2704..9b81cf2 100644
+--- a/conf/machine/smarcfimx6qp2g.conf
++++ b/conf/machine/smarcfimx6qp2g.conf
+@@ -48,6 +48,9 @@ MACHINE_EXTRA_RRECOMMENDS += " \
+ 	nodejs \
+ 	networkmanager \
+ 	android-tools \
++	v4l-utils \
++	gstreamer1.0-plugins-imx \
++	imx-gst1.0-plugin \
+ "
+ 
+ IMAGE_INSTALL:append = " \
+diff --git a/conf/machine/smarcfimx6solo.conf b/conf/machine/smarcfimx6solo.conf
+index 39a39b5..f7960b1 100644
+--- a/conf/machine/smarcfimx6solo.conf
++++ b/conf/machine/smarcfimx6solo.conf
+@@ -48,6 +48,9 @@ MACHINE_EXTRA_RRECOMMENDS += " \
+ 	nodejs \
+ 	networkmanager \
+ 	android-tools \
++	v4l-utils \
++	gstreamer1.0-plugins-imx \
++	imx-gst1.0-plugin \
+ "
+ 
+ IMAGE_INSTALL:append = " \
+diff --git a/recipes-kernel/linux/linux-imx.bb b/recipes-kernel/linux/linux-imx.bb
+index f45ffaf..80b264f 100644
+--- a/recipes-kernel/linux/linux-imx.bb
++++ b/recipes-kernel/linux/linux-imx.bb
+@@ -23,7 +23,7 @@ LOCALVERSION = "-1.0.0+yocto"
+ KERNEL_SRC ?= "git://git@git.embedian.com/developer/smarc-fsl-linux-kernel.git;protocol=ssh;branch=${SRCBRANCH}"
+ SRC_URI = "${KERNEL_SRC}"
+ 
+-SRCREV = "adf910d81008d0af3ca2e53eec31f3b2579c316a"
++SRCREV = "fe5d2c33dc78a79ff1e53b0f83a5b8a44506c38b"
+ 
+ LINUX_VERSION = "5.15.71"
+ 
+diff --git a/scripts/emb_mk_yocto_sdcard/emb-create-yocto-sdcard.sh b/scripts/emb_mk_yocto_sdcard/emb-create-yocto-sdcard.sh
+index 032fad3..e3b7384 100755
+--- a/scripts/emb_mk_yocto_sdcard/emb-create-yocto-sdcard.sh
++++ b/scripts/emb_mk_yocto_sdcard/emb-create-yocto-sdcard.sh
+@@ -143,7 +143,7 @@ if [[ $EUID -ne 0 ]] ; then
+ 	exit 1
+ fi
+ 
+-if [["${MACHINE}" != "smarcimx8qm4g" && "${MACHINE}" != "smarcimx8qm8g" && "${MACHINE}" != "smarcimx8mp2g" && "${MACHINE}" != "smarcimx8mp4g" && "${MACHINE}" != "smarcimx8mp6g" && "${MACHINE}" != "pitximx8mp2g" && "${MACHINE}" != "pitximx8mp4g" && "${MACHINE}" != "pitximx8mp6g" && "${MACHINE}" != "smarcimx8mq2g" && "${MACHINE}" != "smarcimx8mq4g" && "${MACHINE}" != "smarcimx8mm2g" && "${MACHINE}" != "smarcimx8mm4g" && "${MACHINE}" != "smarcfimx6qp2g" && "${MACHINE}" != "smarcfimx6qp1g" && "${MACHINE}" != "smarcfimx6q2g" && "${MACHINE}" != "smarcfimx6q1g" && "${MACHINE}" != "smarcfimx6dl1g" && "${MACHINE}" != "smarcfimx6solo" && "${MACHINE}" != "smarcfimx7d2g" && "${MACHINE}" != "smarcfimx7d" && "${MACHINE}" != "smarcfimx7s" ]] ; then
++if [[ "${MACHINE}" != "smarcimx8qm4g" && "${MACHINE}" != "smarcimx8qm8g" && "${MACHINE}" != "smarcimx8mp2g" && "${MACHINE}" != "smarcimx8mp4g" && "${MACHINE}" != "smarcimx8mp6g" && "${MACHINE}" != "pitximx8mp2g" && "${MACHINE}" != "pitximx8mp4g" && "${MACHINE}" != "pitximx8mp6g" && "${MACHINE}" != "smarcimx8mq2g" && "${MACHINE}" != "smarcimx8mq4g" && "${MACHINE}" != "smarcimx8mm2g" && "${MACHINE}" != "smarcimx8mm4g" && "${MACHINE}" != "smarcfimx6qp2g" && "${MACHINE}" != "smarcfimx6qp1g" && "${MACHINE}" != "smarcfimx6q2g" && "${MACHINE}" != "smarcfimx6q1g" && "${MACHINE}" != "smarcfimx6dl1g" && "${MACHINE}" != "smarcfimx6solo" && "${MACHINE}" != "smarcfimx7d2g" && "${MACHINE}" != "smarcfimx7d" && "${MACHINE}" != "smarcfimx7s" ]] ; then
+ 	echo "Unsupported machine!!"
+ 	exit 1
+ fi
+@@ -259,9 +259,12 @@ function install_bootloader
+ {
+ 	echo
+ 	echo "Installing U-Boot"
+-	if [[ "${MACHINE}" = "smarcimx8qm4g" || "${MACHINE}" = "smarcimx8qm8g" || "${MACHINE}" = "smarcimx8mp2g" || "${MACHINE}" = "smarcimx8mp4g" || "${MACHINE}" = "smarcimx8mp6g" || "${MACHINE}" = "pitximx8mp2g" || "${MACHINE}" = "pitximx8mp4g" || "${MACHINE}" = "pitximx8mp6g" || "${MACHINE}" = "smarcimx8mq2g" || "${MACHINE}" = "smarcimx8mq4g" || "${MACHINE}" = "smarcimx8mm2g" || "${MACHINE}" = "smarcimx8mm4g" ]]; then
++	if [[ "${MACHINE}" = "smarcimx8mp2g" || "${MACHINE}" = "smarcimx8mp4g" || "${MACHINE}" = "smarcimx8mp6g" || "${MACHINE}" = "pitximx8mp2g" || "${MACHINE}" = "pitximx8mp4g" || "${MACHINE}" = "pitximx8mp6g" || "${MACHINE}" = "smarcimx8mq2g" || "${MACHINE}" = "smarcimx8mq4g" || "${MACHINE}" = "smarcimx8mm2g" || "${MACHINE}" = "smarcimx8mm4g" ]]; then
+ 	dd if=${YOCTO_IMGS_PATH}/imx-boot-${MACHINE}-sd.bin-flash_evk of=${LPARAM_BLOCK_DEVICE} bs=1K seek=${BOOTLOADER_OFFSET}; sync
+ 	fi
++	if [[ "${MACHINE}" = "smarcimx8qm4g" || "${MACHINE}" = "smarcimx8qm8g" ]]; then
++	dd if=${YOCTO_IMGS_PATH}/imx-boot-${MACHINE}-sd.bin-flash_spl of=${LPARAM_BLOCK_DEVICE} bs=1K seek=${BOOTLOADER_OFFSET}; sync
++	fi
+ 	if [[ "${MACHINE}" = "smarcfimx6q1g" || "${MACHINE}" = "smarcfimx6q2g" || "${MACHINE}" = "smarcfimx6qp1g" || "${MACHINE}" = "smarcfimx6qp2g" || "${MACHINE}" = "smarcfimx6dl1g" || "${MACHINE}" = "smarcfimx6solo" || "${MACHINE}" = "smarcfimx7d2g" || "${MACHINE}" = "smarcfimx7d" || "${MACHINE}" = "smarcfimx7s" ]]; then
+ 	dd if=${YOCTO_IMGS_PATH}/u-boot.imx of=${LPARAM_BLOCK_DEVICE} bs=512 seek=${BOOTLOADER_OFFSET}; sync
+ 	fi
+@@ -297,6 +300,9 @@ function install_yocto
+                 cp -v ${YOCTO_IMGS_PATH}/imx8mp-smarc${DISPLAY}.dtb ${P1_MOUNT_DIR}/dtbs/imx8mp-smarc.dtb
+                 cp -v ${YOCTO_SCRIPTS_PATH}/uEnv_8mp.txt ${P1_MOUNT_DIR}/uEnv.txt
+ 	elif [[ "${MACHINE}" = "smarcimx8qm4g" || "${MACHINE}" = "smarcimx8qm8g" ]]; then
++		cp -v ${YOCTO_IMGS_PATH}/dpfw.bin ${P1_MOUNT_DIR}/
++		cp -v ${YOCTO_IMGS_PATH}/hdmirxfw.bin ${P1_MOUNT_DIR}/
++		cp -v ${YOCTO_IMGS_PATH}/hdmitxfw.bin ${P1_MOUNT_DIR}/
+                 cp -v ${YOCTO_IMGS_PATH}/imx8qm-smarc${DISPLAY}.dtb ${P1_MOUNT_DIR}/dtbs/imx8qm-smarc.dtb
+                 cp -v ${YOCTO_SCRIPTS_PATH}/uEnv_8qm.txt ${P1_MOUNT_DIR}/uEnv.txt
+ 	elif [[ "${MACHINE}" = "pitximx8mp2g" || "${MACHINE}" = "pitximx8mp4g" || "${MACHINE}" = "pitximx8mp6g" ]]; then
+@@ -379,9 +385,12 @@ function copy_images
+ 		exit 1
+ 	fi
+ 
+-	if [[ "${MACHINE}" = "smarcimx8qm4g" || "${MACHINE}" = "smarcimx8qm8g" || "${MACHINE}" = "smarcimx8mp2g" || "${MACHINE}" = "smarcimx8mp4g" || "${MACHINE}" = "smarcimx8mp6g" || "${MACHINE}" = "pitximx8mp2g" || "${MACHINE}" = "pitximx8mp4g" || "${MACHINE}" = "pitximx8mp6g" || "${MACHINE}" = "smarcimx8mq2g" || "${MACHINE}" = "smarcimx8mq4g" || "${MACHINE}" = "smarcimx8mm2g" || "${MACHINE}" = "smarcimx8mm4g" ]]; then
++	if [[ "${MACHINE}" = "smarcimx8mp2g" || "${MACHINE}" = "smarcimx8mp4g" || "${MACHINE}" = "smarcimx8mp6g" || "${MACHINE}" = "pitximx8mp2g" || "${MACHINE}" = "pitximx8mp4g" || "${MACHINE}" = "pitximx8mp6g" || "${MACHINE}" = "smarcimx8mq2g" || "${MACHINE}" = "smarcimx8mq4g" || "${MACHINE}" = "smarcimx8mm2g" || "${MACHINE}" = "smarcimx8mm4g" ]]; then
+ 		cp ${YOCTO_IMGS_PATH}/imx-boot-${MACHINE}-sd.bin-* ${P2_MOUNT_DIR}/opt/images/Yocto
+ 		(cd ${P2_MOUNT_DIR}/opt/images/Yocto; ln -fs imx-boot-${MACHINE}-sd.bin-flash_evk imx-boot-sd.bin)
++	elif [[ "${MACHINE}" = "smarcimx8qm4g" || "${MACHINE}" = "smarcimx8qm8g" ]]; then
++		cp ${YOCTO_IMGS_PATH}/imx-boot-${MACHINE}-sd.bin-* ${P2_MOUNT_DIR}/opt/images/Yocto
++		(cd ${P2_MOUNT_DIR}/opt/images/Yocto; ln -fs imx-boot-${MACHINE}-sd.bin-flash_spl imx-boot-sd.bin)
+ 	else
+ 		cp ${YOCTO_IMGS_PATH}/u-boot.imx ${P2_MOUNT_DIR}/opt/images/Yocto/u-boot.imx
+ 	fi
+diff --git a/scripts/emb_mk_yocto_sdcard/smarc-imx8qm-create-yocto-emmc.sh b/scripts/emb_mk_yocto_sdcard/smarc-imx8qm-create-yocto-emmc.sh
+index bef29ef..45ea6f2 100755
+--- a/scripts/emb_mk_yocto_sdcard/smarc-imx8qm-create-yocto-emmc.sh
++++ b/scripts/emb_mk_yocto_sdcard/smarc-imx8qm-create-yocto-emmc.sh
+@@ -149,6 +149,9 @@ install_kernel_to_emmc()
+         mount /dev/${BLOCK}${PART}${BOOTPART} ${MOUNTDIR}
+ 	mkdir -p ${MOUNTDIR}/dtbs/
+ 	cp -v ${IMGS_PATH}/${KERNEL_IMAGE} ${MOUNTDIR}
++	cp -v ${IMGS_PATH}/dpfw.bin ${MOUNTDIR}
++	cp -v ${IMGS_PATH}/hdmirxfw.bin ${MOUNTDIR}
++	cp -v ${IMGS_PATH}/hdmitxfw.bin ${MOUNTDIR}
+ 	cp -v ${IMGS_PATH}/${DTB_PREFIX}${DISPLAY}.dtb ${MOUNTDIR}/dtbs/imx8qm-smarc.dtb
+ 	cp -v ${IMGS_PATH}/uEnv.txt ${MOUNTDIR}
+ 
