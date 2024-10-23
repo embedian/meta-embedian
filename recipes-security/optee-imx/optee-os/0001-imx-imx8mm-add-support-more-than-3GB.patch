@@ -1,0 +1,25 @@
+From 23fb0d80f8ff2aff193b8f5e398ba3e64a85fbba Mon Sep 17 00:00:00 2001
+From: Eric Lee <eric.lee@embedian.com>
+Date: Wed, 23 Oct 2024 03:33:00 +0000
+Subject: [PATCH] imx: imx8mm:  add support more than 3GB
+
+---
+ core/arch/arm/plat-imx/conf.mk | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/core/arch/arm/plat-imx/conf.mk b/core/arch/arm/plat-imx/conf.mk
+index 0bd9ccd6b..87af64491 100644
+--- a/core/arch/arm/plat-imx/conf.mk
++++ b/core/arch/arm/plat-imx/conf.mk
+@@ -378,6 +378,8 @@ endif
+ ifneq (,$(filter $(PLATFORM_FLAVOR),mx8mmevk))
+ CFG_DDR_SIZE ?= 0x80000000
+ CFG_UART_BASE ?= UART2_BASE
++$(call force,CFG_CORE_LARGE_PHYS_ADDR,y)
++$(call force,CFG_CORE_ARM64_PA_BITS,36)
+ endif
+ 
+ ifneq (,$(filter $(PLATFORM_FLAVOR),mx8mm_cl_iot_gate))
+-- 
+2.34.1
+
