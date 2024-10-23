@@ -1,0 +1,26 @@
+#console port SER3
+console=ttymxc1,115200 earlycon=ec_imx6q,0x30890000,115200
+#console port SER2
+#console=ttymxc2,115200 earlycon=ec_imx6q,0x30880000,115200
+#console port SER1
+#console=ttymxc3,115200 earlycon=ec_imx6q,0x30a60000,115200
+#console port SER0
+#console=ttymxc0,115200 earlycon=ec_imx6q,0x30860000,115200
+mmcdev=0
+mmcpart=1
+image=Image
+loadaddr=0x40480000
+fdt_addr=0x43000000
+mmcroot=/dev/mmcblk0p2 rw
+usbroot=/dev/sda2 rw
+mmcrootfstype=ext4 rootwait fixrtc
+netdev=eth0
+ethact=FEC0
+ipaddr=192.168.1.150
+serverip=192.168.1.53
+gatewayip=192.168.1.254
+mmcargs=setenv bootargs ${mcore_clk} console=${console} root=${mmcroot} rootfstype=${mmcrootfstype} ${optargs} cma=400M
+uenvcmd=run loadimage; run loadfdt; run mmcboot
+# USB Boot
+#usbargs=setenv bootargs console=${console} root=${usbroot} rootfstype=${mmcrootfstype} ${optargs}
+#uenvcmd=run loadusbimage; run loadusbfdt; run usbboot

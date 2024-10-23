@@ -1,0 +1,15 @@
+console=ttymxc2,115200
+mmcdev=1
+mmcpart=1
+image=zImage
+loadaddr=0x80800000
+fdt_addr=0x83000000
+mmcroot=/dev/mmcblk2p2 ro
+mmcrootfstype=ext4 rootwait fixrtc
+netdev=eth0
+ethact=FEC0
+ipaddr=192.168.1.150
+serverip=192.168.1.53
+gatewayip=192.168.1.254
+mmcargs=setenv bootargs console=${console} root=${mmcroot} rootfstype=${mmcrootfstype} ${optargs}
+uenvcmd=run loadzimage; run loadfdt; run mmcboot

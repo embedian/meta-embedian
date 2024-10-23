@@ -1,0 +1,25 @@
+From ae534446d4cbf8b0eec8985b12b7fbd451e2e434 Mon Sep 17 00:00:00 2001
+From: Eric Lee <eric.lee@embedian.com>
+Date: Wed, 23 Oct 2024 03:36:12 +0000
+Subject: [PATCH] imx: imx8mq:  add support more than 3GB
+
+---
+ core/arch/arm/plat-imx/conf.mk | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/core/arch/arm/plat-imx/conf.mk b/core/arch/arm/plat-imx/conf.mk
+index 0bd9ccd6b..c1486e727 100644
+--- a/core/arch/arm/plat-imx/conf.mk
++++ b/core/arch/arm/plat-imx/conf.mk
+@@ -373,6 +373,8 @@ endif
+ ifneq (,$(filter $(PLATFORM_FLAVOR),mx8mqevk))
+ CFG_DDR_SIZE ?= 0xc0000000
+ CFG_UART_BASE ?= UART1_BASE
++$(call force,CFG_CORE_LARGE_PHYS_ADDR,y)
++$(call force,CFG_CORE_ARM64_PA_BITS,36)
+ endif
+ 
+ ifneq (,$(filter $(PLATFORM_FLAVOR),mx8mmevk))
+-- 
+2.34.1
+
