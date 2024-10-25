@@ -386,10 +386,68 @@ function copy_images
 	mkdir -p ${P2_MOUNT_DIR}/opt/images/Yocto
 
 	# Copy image for eMMC
-	if [ -f ${YOCTO_IMGS_PATH}/${YOCTO_DEFAULT_IMAGE}-${MACHINE}.tar.bz2 ]; then
-		pv ${YOCTO_IMGS_PATH}/${YOCTO_DEFAULT_IMAGE}-${MACHINE}.tar.bz2 > ${P2_MOUNT_DIR}/opt/images/Yocto/rootfs.tar.bz2
-	else
-		echo "rootfs.tar.gz file is not present. Installation on \"eMMC\" will not be supported."
+	if [[ "${MACHINE}" = "smarcimx8mp2gdesktop" ]]; then
+
+		if [ -f ${YOCTO_IMGS_PATH}/${YOCTO_DEFAULT_IMAGE}-smarcimx8mp2g.tar.bz2 ]; then
+			pv ${YOCTO_IMGS_PATH}/${YOCTO_DEFAULT_IMAGE}-smarcimx8mp2g.tar.bz2 > ${P2_MOUNT_DIR}/opt/images/Yocto/rootfs.tar.bz2
+		else
+			echo "rootfs.tar.gz file is not present. Installation on \"eMMC\" will not be supported."
+		fi
+	elif [[ "${MACHINE}" = "smarcimx8mp4gdesktop" ]]; then
+
+		if [ -f ${YOCTO_IMGS_PATH}/${YOCTO_DEFAULT_IMAGE}-smarcimx8mp4g.tar.bz2 ]; then
+			pv ${YOCTO_IMGS_PATH}/${YOCTO_DEFAULT_IMAGE}-smarcimx8mp4g.tar.bz2 > ${P2_MOUNT_DIR}/opt/images/Yocto/rootfs.tar.bz2
+		else
+			echo "rootfs.tar.gz file is not present. Installation on \"eMMC\" will not be supported."
+		fi
+	elif [[ "${MACHINE}" = "smarcimx8mp6gdesktop" ]]; then
+		if [ -f ${YOCTO_IMGS_PATH}/${YOCTO_DEFAULT_IMAGE}-smarcimx8mp6g.tar.bz2 ]; then
+			pv ${YOCTO_IMGS_PATH}/${YOCTO_DEFAULT_IMAGE}-smarcimx8mp6g.tar.bz2 > ${P2_MOUNT_DIR}/opt/images/Yocto/rootfs.tar.bz2
+		else
+			echo "rootfs.tar.gz file is not present. Installation on \"eMMC\" will not be supported."
+		fi
+	elif [[ "${MACHINE}" = "pitximx8mp2gdesktop" ]]; then
+		if [ -f ${YOCTO_IMGS_PATH}/${YOCTO_DEFAULT_IMAGE}-pitximx8mp2g.tar.bz2 ]; then
+			pv ${YOCTO_IMGS_PATH}/${YOCTO_DEFAULT_IMAGE}-pitximx8mp2g.tar.bz2 > ${P2_MOUNT_DIR}/opt/images/Yocto/rootfs.tar.bz2
+		else
+			echo "rootfs.tar.gz file is not present. Installation on \"eMMC\" will not be supported."
+		fi
+	elif [[ "${MACHINE}" = "pitximx8mp4gdesktop" ]]; then
+		if [ -f ${YOCTO_IMGS_PATH}/${YOCTO_DEFAULT_IMAGE}-pitximx8mp4g.tar.bz2 ]; then
+			pv ${YOCTO_IMGS_PATH}/${YOCTO_DEFAULT_IMAGE}-pitximx8mp4g.tar.bz2 > ${P2_MOUNT_DIR}/opt/images/Yocto/rootfs.tar.bz2
+		else
+			echo "rootfs.tar.gz file is not present. Installation on \"eMMC\" will not be supported."
+		fi
+	elif [[ "${MACHINE}" = "pitximx8mp6gdesktop" ]]; then
+		if [ -f ${YOCTO_IMGS_PATH}/${YOCTO_DEFAULT_IMAGE}-pitximx8mp6g.tar.bz2 ]; then
+			pv ${YOCTO_IMGS_PATH}/${YOCTO_DEFAULT_IMAGE}-pitximx8mp6g.tar.bz2 > ${P2_MOUNT_DIR}/opt/images/Yocto/rootfs.tar.bz2
+		else
+			echo "rootfs.tar.gz file is not present. Installation on \"eMMC\" will not be supported."
+		fi
+	elif [[ "${MACHINE}" = "smarcimx8qm8gdesktop" ]]; then
+		if [ -f ${YOCTO_IMGS_PATH}/${YOCTO_DEFAULT_IMAGE}-smarcimx8qm8g.tar.bz2 ]; then	
+			pv ${YOCTO_IMGS_PATH}/${YOCTO_DEFAULT_IMAGE}-smarcimx8qm8g.tar.bz2 > ${P2_MOUNT_DIR}/opt/images/Yocto/rootfs.tar.bz2
+		else
+			echo "rootfs.tar.gz file is not present. Installation on \"eMMC\" will not be supported."
+		fi
+	elif [[ "${MACHINE}" = "smarcimx8qm4gdesktop" ]]; then
+		if [ -f ${YOCTO_IMGS_PATH}/${YOCTO_DEFAULT_IMAGE}-smarcimx8qm4g.tar.bz2 ]; then
+			pv ${YOCTO_IMGS_PATH}/${YOCTO_DEFAULT_IMAGE}-smarcimx8qm4g.tar.bz2 > ${P2_MOUNT_DIR}/opt/images/Yocto/rootfs.tar.bz2
+		else
+			echo "rootfs.tar.gz file is not present. Installation on \"eMMC\" will not be supported."
+		fi
+	elif [[ "${MACHINE}" = "smarcimx8mq2gdesktop" ]]; then
+		if [ -f ${YOCTO_IMGS_PATH}/${YOCTO_DEFAULT_IMAGE}-smarcimx8mq2g.tar.bz2 ]; then
+			pv ${YOCTO_IMGS_PATH}/${YOCTO_DEFAULT_IMAGE}-smarcimx8mq2g.tar.bz2 > ${P2_MOUNT_DIR}/opt/images/Yocto/rootfs.tar.bz2
+		else
+			echo "rootfs.tar.gz file is not present. Installation on \"eMMC\" will not be supported."
+		fi
+	elif [[ "${MACHINE}" = "smarcimx8mq4gdesktop" ]]; then
+		if [ -f ${YOCTO_IMGS_PATH}/${YOCTO_DEFAULT_IMAGE}-smarcimx8mq4g.tar.bz2 ]; then
+			pv ${YOCTO_IMGS_PATH}/${YOCTO_DEFAULT_IMAGE}-smarcimx8mq4g.tar.bz2 > ${P2_MOUNT_DIR}/opt/images/Yocto/rootfs.tar.bz2
+		else
+			echo "rootfs.tar.gz file is not present. Installation on \"eMMC\" will not be supported."
+		fi
 	fi
 
         echo
