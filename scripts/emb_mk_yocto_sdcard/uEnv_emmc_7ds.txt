@@ -1,5 +1,5 @@
 console=ttymxc2,115200
-mmcdev=1
+mmcdev=2
 mmcpart=1
 image=zImage
 loadaddr=0x80800000
