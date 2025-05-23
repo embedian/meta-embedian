@@ -22,3 +22,4 @@ IMAGE_INSTALL += "\
     "
 
 export IMAGE_BASENAME = "smarct437x-rootfs-image"
+COMPATIBLE_MACHINE = '(smarct437x)'
