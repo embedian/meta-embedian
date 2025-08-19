@@ -1,0 +1,26 @@
+#####HDMI######
+optargs="video=mxcfb0:dev=hdmi,1280x720M@60,if=RGB24,bpp=32 consoleblank=0"
+#####LVDS#####
+#optargs="video=mxcfb0:dev=ldb,if=RGB24,bpp=32 consoleblank=0 fbmem=24M vmalloc=400M"
+#####Parallel LCD Setting#####
+#optargs="video=mxcfb0:dev=lcd,CLAA-WVGA,if=RGB24,bpp=32 consoleblank=0 fbmem=24M vmalloc=400M"
+#####Parallel LCD to CH7055A (VESA Timing Format) Setting #####
+#optargs="video=mxcfb0:dev=lcd,768x576M@75,if=RGB24,bpp=32 consoleblank=0"
+#optargs="video=mxcfb0:dev=lcd,1280x1024M@60,if=RGB24,bpp=32 consoleblank=0"
+#optargs="video=mxcfb0:dev=lcd,640x480M@60,if=RGB24,bpp=32 consoleblank=0"
+
+console=ttymxc4,115200
+mmcdev=1
+mmcpart=1
+image=zImage
+loadaddr=0x12000000
+fdt_addr=0x18000000
+mmcroot=/dev/mmcblk1p2 ro
+mmcrootfstype=ext4 rootwait fixrtc
+netdev=eth0
+ethact=FEC0
+ipaddr=192.168.1.150
+serverip=192.168.1.53
+gatewayip=192.168.1.254
+mmcargs=setenv bootargs console=${console} root=${mmcroot} rootfstype=${mmcrootfstype} ${optargs}
+uenvcmd=run loadzimage; run loadfdt; run mmcboot

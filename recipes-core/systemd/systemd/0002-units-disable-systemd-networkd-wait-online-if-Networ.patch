@@ -1,0 +1,27 @@
+From eb7b3ae07675a607891dd67e351db8acd085a940 Mon Sep 17 00:00:00 2001
+From: Eric Lee <eric.lee@embedian.com>
+Date: Thu, 14 Aug 2025 09:11:42 +0000
+Subject: [PATCH 2/2] units: disable systemd-networkd-wait-online if
+ NetworkManager is enabled
+Upstream-Status: Pending
+
+---
+ units/systemd-networkd-wait-online.service.in | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/units/systemd-networkd-wait-online.service.in b/units/systemd-networkd-wait-online.service.in
+index 7768121f5f..b06a605529 100644
+--- a/units/systemd-networkd-wait-online.service.in
++++ b/units/systemd-networkd-wait-online.service.in
+@@ -20,6 +20,8 @@ Before=network-online.target shutdown.target
+ [Service]
+ Type=oneshot
+ ExecStart={{LIBEXECDIR}}/systemd-networkd-wait-online
++ExecCondition=/bin/bash -c '! /bin/systemctl is-enabled NetworkManager-wait-online.service'
++ExecCondition=/bin/bash -c '! /bin/systemctl is-enabled connman-wait-online.service'
+ RemainAfterExit=yes
+ 
+ [Install]
+-- 
+2.34.1
+

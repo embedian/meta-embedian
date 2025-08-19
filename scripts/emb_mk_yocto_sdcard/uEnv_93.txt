@@ -1,0 +1,27 @@
+#console port SER3
+console=ttyLP0,115200 earlycon
+#console port SER2
+#console=ttyLP7,115200 earlycon
+#console port SER1
+#console=ttyLP1,115200 earlycon
+#console port SER0
+#console=ttyLP5,115200 earlycon
+mmcdev=1
+mmcpart=1
+image=Image
+#loadaddr=0x80400000
+#fdt_addr=0x83000000
+loadaddr=0x80400000
+fdt_addr=0x84000000
+mmcroot=/dev/mmcblk1p2 rw
+mmcrootfstype=ext4 rootwait fixrtc
+netdev=eth0
+ethact=FEC0
+ipaddr=192.168.1.150
+serverip=192.168.1.53
+gatewayip=192.168.1.254
+mmcargs=setenv bootargs console=${console} root=${mmcroot} rootfstype=${mmcrootfstype} ${optargs}
+# uenvcmd=run loadimage; run loadfdt; run mmcboot
+# USB Boot
+#usbargs=setenv bootargs console=${console} root=${usbroot} rootfstype=${mmcrootfstype} ${optargs}
+#uenvcmd=run loadusbimage; run loadusbfdt; run usbboot
