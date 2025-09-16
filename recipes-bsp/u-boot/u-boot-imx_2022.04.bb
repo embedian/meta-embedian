@@ -12,8 +12,7 @@ require recipes-bsp/u-boot/u-boot-imx-common_${PV}.inc
 LIC_FILES_CHKSUM = "file://Licenses/gpl-2.0.txt;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
 # Use Github as U-Boot source repo
-# UBOOT_SRC ?= "git://github.com/embedian/smarc-uboot.git;protocol=https"
-UBOOT_SRC ?= "git://git@git.embedian.com/developer/smarc-t335x-uboot.git;protocol=ssh"
+UBOOT_SRC ?= "git://github.com/embedian/smarc-uboot.git;protocol=https"
 SRCBRANCH = "emb_lf_v2022.04"
 SRC_URI = "${UBOOT_SRC};branch=${SRCBRANCH}"
 SRCREV = "9a2da0b15d2a8a86385105b573be32d040a54859"

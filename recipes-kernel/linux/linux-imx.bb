@@ -19,8 +19,7 @@ DEPENDS += "lzop-native bc-native"
 SRCBRANCH = "emb_imx_lf-5.15.y"
 LOCALVERSION = "-1.0.0+yocto"
 # Use Github as Kernel Source Repo
-# KERNEL_SRC ?= "git://github.com/embedian/smarc-fsl-linux-kernel.git;protocol=https;branch=${SRCBRANCH}"
-KERNEL_SRC ?= "git://git@git.embedian.com/developer/smarc-fsl-linux-kernel.git;protocol=ssh;branch=${SRCBRANCH}"
+KERNEL_SRC ?= "git://github.com/embedian/smarc-fsl-linux-kernel.git;protocol=https;branch=${SRCBRANCH}"
 SRC_URI = "${KERNEL_SRC}"
 
 SRCREV = "fe5d2c33dc78a79ff1e53b0f83a5b8a44506c38b"
