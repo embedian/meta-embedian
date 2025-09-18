@@ -3,7 +3,7 @@ DESCRIPTION = "i.MX U-Boot suppporting i.MX reference boards."
 LICENSE = "GPL-2.0-or-later"
 LIC_FILES_CHKSUM = "file://Licenses/gpl-2.0.txt;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
-UBOOT_SRC ?= "git://git@git.embedian.com/developer/smarc-t335x-uboot.git;protocol=ssh"
+UBOOT_SRC ?= "git://github.com/embedian/smarc-uboot.git;protocol=https"
 SRC_URI = "${UBOOT_SRC};branch=${SRCBRANCH}"
 SRCBRANCH = "emb_lf_v2023.04"
 LOCALVERSION ?= "-1.0.0+yocto"
