@@ -340,7 +340,7 @@ function install_yocto
 
 	echo
 	echo "Installing Yocto Root File System"
-	tar jxvf ${YOCTO_IMGS_PATH}/${YOCTO_DEFAULT_IMAGE}-${MACHINE}.tar.bz2 -C ${P2_MOUNT_DIR}/
+	tar jxvf ${YOCTO_IMGS_PATH}/${YOCTO_DEFAULT_IMAGE}-${MACHINE}.rootfs.tar.bz2 -C ${P2_MOUNT_DIR}/
 	sync
 }
 
