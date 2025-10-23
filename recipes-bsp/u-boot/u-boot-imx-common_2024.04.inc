@@ -7,7 +7,7 @@ SRC_URI = "${UBOOT_SRC};branch=${SRCBRANCH}"
 UBOOT_SRC ?= "git://github.com/embedian/smarc-uboot.git;protocol=https"
 SRCBRANCH = "emb_lf_v2024.04"
 LOCALVERSION ?= "-1.0.0+yocto"
-SRCREV = "b3207ade71dd2efc68a661ba33b8e764980f711a"
+SRCREV = "b3152787abfc4b959a5ee183b47db3aa3565c864"
 
 DEPENDS += " \
     bc-native \
