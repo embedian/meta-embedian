@@ -6,7 +6,7 @@
 # SPDX-License-Identifier: MIT
 #
 
-SUMMARY = "Linux Kernel provided and supported by NXP"
+SUMMARY = "Linux PREEMPT_RT Kernel provided and supported by NXP"
 DESCRIPTION = "Linux Kernel provided and supported by NXP with focus on \
 i.MX Family Reference Boards. It includes support for many IPs such as GPU, VPU and IPU."
 
@@ -22,12 +22,32 @@ KBRANCH = "${SRCBRANCH}"
 LOCALVERSION = "-1.0.0+yocto"
 SRCREV = "6c9cdbd97f2ef2bc44ebafcce7e6de7e824dad3f"
 
+REAL_TIME_EDGE_LINUX_SRC ?= "git://github.com/embedian/smarc-fsl-linux-kernel.git;protocol=https"
+REAL_TIME_EDGE_LINUX_BRANCH ?= "emb_rtlinux_6.6.36"
+REAL_TIME_EDGE_LINUX_SRCREV ?= "ab2a00cd4709291e9b098105028041f5ea709f58"
+
+KERNEL_SRC:real-time-edge = "${REAL_TIME_EDGE_LINUX_SRC};branch=${REAL_TIME_EDGE_LINUX_BRANCH}"
+SRCBRANCH:real-time-edge = "${REAL_TIME_EDGE_LINUX_BRANCH}"
+SRCREV:real-time-edge = "${REAL_TIME_EDGE_LINUX_SRCREV}"
+SRC_URI = "${KERNEL_SRC}"
+
+FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
+SRC_URI:append:real-time-edge = " \
+    file://linux-baremetal.config \
+    file://linux-baremetal-imx93.config \
+"
+
+do_configure:prepend:real-time-edge() {
+    mkdir -p ${WORKDIR}/source-date-epoch
+    date '+%s' > ${WORKDIR}/source-date-epoch/__source_date_epoch.txt
+}
+
 # PV is defined in the base in linux-imx.inc file and uses the LINUX_VERSION definition
 # required by kernel-yocto.bbclass.
 #
 # LINUX_VERSION define should match to the kernel version referenced by SRC_URI and
 # should be updated once patchlevel is merged.
-LINUX_VERSION = "6.6.52"
+LINUX_VERSION = "6.6.36"
 
 KERNEL_CONFIG_COMMAND = "oe_runmake_call -C ${S} CC="${KERNEL_CC}" O=${B} olddefconfig"
 
@@ -40,8 +60,8 @@ DO_CONFIG_V7_COPY:mx8-nxp-bsp = "no"
 DO_CONFIG_V7_COPY:mx9-nxp-bsp = "no"
 
 # Add setting for LF Mainline build
-IMX_KERNEL_CONFIG_AARCH32 = "emb_imx_v7_defconfig"
-IMX_KERNEL_CONFIG_AARCH64 = "emb_imx_v8_defconfig"
+IMX_KERNEL_CONFIG_AARCH32 = "rt_emb_imx_v7_defconfig"
+IMX_KERNEL_CONFIG_AARCH64 = "rt_emb_imx_v8_defconfig"
 KBUILD_DEFCONFIG ?= ""
 KBUILD_DEFCONFIG:mx6-nxp-bsp= "${IMX_KERNEL_CONFIG_AARCH32}"
 KBUILD_DEFCONFIG:mx7-nxp-bsp= "${IMX_KERNEL_CONFIG_AARCH32}"
