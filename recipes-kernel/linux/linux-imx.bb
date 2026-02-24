@@ -18,11 +18,11 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=6bc538ed5bd9a7fc9398086aedcd7e46"
 DEPENDS += "lzop-native bc-native"
 
 SRC_URI = "${KERNEL_SRC}"
-KERNEL_SRC ?= "git://git@git.embedian.com/developer/smarc-fsl-linux-kernel.git;protocol=ssh;branch=${SRCBRANCH}"
+KERNEL_SRC ?= "git://github.com/embedian/smarc-fsl-linux-kernel.git;protocol=ssh;branch=${SRCBRANCH}"
 KBRANCH = "${SRCBRANCH}"
 SRCBRANCH = "emb_lf-6.1.y"
 LOCALVERSION = "-1.0.0+yocto"
-SRCREV = "003f9142c479bb22f91db9d0e16cdb386160bffd"
+SRCREV = "e2a07dba46cce89f52d144087362e469d99b6b61"
 
 # PV is defined in the base in linux-imx.inc file and uses the LINUX_VERSION definition
 # required by kernel-yocto.bbclass.
