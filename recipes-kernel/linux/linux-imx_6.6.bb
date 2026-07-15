@@ -20,7 +20,7 @@ LINUX_IMX_SRC ?= "git://github.com/embedian/smarc-fsl-linux-kernel.git;protocol=
 SRCBRANCH = "emb_lf-6.6.y"
 KBRANCH = "${SRCBRANCH}"
 LOCALVERSION = "-1.0.0+yocto"
-SRCREV = "6c9cdbd97f2ef2bc44ebafcce7e6de7e824dad3f"
+SRCREV = "9c831107a0121787cfb5c03a6c1530853e920e9a"
 
 # PV is defined in the base in linux-imx.inc file and uses the LINUX_VERSION definition
 # required by kernel-yocto.bbclass.

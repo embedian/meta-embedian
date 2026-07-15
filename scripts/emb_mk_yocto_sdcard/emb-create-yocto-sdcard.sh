@@ -21,6 +21,7 @@ readonly YOCTO_BUILD=${YOCTO_ROOT}/build-xwayland
 readonly YOCTO_BUILD=${YOCTO_ROOT}/build-fb
 	fi
 readonly YOCTO_DEFAULT_IMAGE=fsl-image-qt6-validation-imx
+#readonly YOCTO_DEFAULT_IMAGE=imx-image-full
 
 readonly YOCTO_SCRIPTS_PATH=${SCRIPT_POINT}
 readonly YOCTO_IMGS_PATH=${YOCTO_BUILD}/tmp/deploy/images/${MACHINE}
@@ -351,8 +352,8 @@ function copy_images
 	mkdir -p ${P2_MOUNT_DIR}/opt/images/Yocto
 
 	# Copy image for eMMC
-	if [ -f ${YOCTO_IMGS_PATH}/${YOCTO_DEFAULT_IMAGE}-${MACHINE}.tar.bz2 ]; then
-		pv ${YOCTO_IMGS_PATH}/${YOCTO_DEFAULT_IMAGE}-${MACHINE}.tar.bz2 > ${P2_MOUNT_DIR}/opt/images/Yocto/rootfs.tar.bz2
+	if [ -f ${YOCTO_IMGS_PATH}/${YOCTO_DEFAULT_IMAGE}-${MACHINE}.rootfs.tar.bz2 ]; then
+		pv ${YOCTO_IMGS_PATH}/${YOCTO_DEFAULT_IMAGE}-${MACHINE}.rootfs.tar.bz2 > ${P2_MOUNT_DIR}/opt/images/Yocto/rootfs.tar.bz2
 	else
 		echo "rootfs.tar.bz2 file is not present. Installation on \"eMMC\" will not be supported."
 	fi
